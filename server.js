@@ -21,12 +21,14 @@ app.use(express.urlencoded({extended : true}))
 app.use(express.json())
 app.use(cors())
 
-app.get("/search", async (req,res) => {
+app.use(express.static("public"));
+
+app.get("/search", async (request,response) => {
     try{
         let result = await collection.aggregate([
-            {"$Search" : {
+            {"$search" : {
                 "autocomplete": {
-                    "query" :  `${req.query.query}`,
+                    "query" :  `${request.query.query}`,
                     "path": "title",
                     "fuzzy": {
                         "maxEdits":2,
@@ -36,24 +38,26 @@ app.get("/search", async (req,res) => {
             }
         }
         ]).toArray()
-        res.send(result)
-    }catch (error){
-        res.status(500).send({message: error.message})
+        response.send(result)
+    } catch (error) {
+        response.status(500).send({message: error.message})
     }
 })
 
-app.get("/get/:id", async (req, res) => {
+app.get("/get/:id", async (request, response) => {
     try {
         let result = await collection.findOne({
-            "i_d": ObjectId(req.params.id)
+            "_id": ObjectId(request.params.id)
         })
-        res.send(result)
+        response.send(result)
     } catch (error){
-        res.status(500).send({message: error.message})
+        response.status(500).send({message: error.message})
     }
 })
 
-
+app.get("/", (request, response) => {
+    response.send("Welcome to the server!");
+});
 app.listen(process.env.PORT || PORT, () => {
             console.log(`Server is running on PORT ${PORT}`)
         })

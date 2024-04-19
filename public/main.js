@@ -1,16 +1,16 @@
 $(document).ready(function () {
     $("#title").autocomplete({
-        source: async function (req, res) {
-            let data = await fetch(`http://localhost:7860/search?query=${req.term}`)
+        source: async function (request, response) {
+            let data = await fetch(`http://localhost:7860/search?query=${request.term}`)
                 .then(results => results.json())
                 .then(results => results.map(result => {
                     return {
                         label: result.title,
-                        value: ressult.title,
+                        value: result.title,
                         id: result._id
                     }
                 }))
-            res(data)
+            response(data)
         },
         minLength: 2,
         select: function (event, ui) {
