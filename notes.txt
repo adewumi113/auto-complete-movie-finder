@@ -1,0 +1,3 @@
+dotenv allows us to hide files, it allows to create environment where we can set up some codes and obscure them from github or outsiders.
+
+Middleware helps us handle messages as they are passing back and forth to and from our server. 

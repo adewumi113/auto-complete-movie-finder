@@ -1,0 +1,18 @@
+{
+  "name": "mayanwolfe-autocomplete-app",
+  "version": "1.0.0",
+  "description": "Autocomplete Movie Finder App",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "author": "Larry Adewumi",
+  "license": "ISC",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.5",
+    "express": "^4.19.2",
+    "mongodb": "^6.5.0"
+  }
+}
