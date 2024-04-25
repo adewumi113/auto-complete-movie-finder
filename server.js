@@ -23,12 +23,12 @@ app.use(cors())
 
 app.use(express.static("public"));
 
-app.get("/search", async (request,response) => {
+app.get("/search", async (req,res) => {
     try{
         let result = await collection.aggregate([
             {"$search" : {
                 "autocomplete": {
-                    "query" :  `${request.query.query}`,
+                    "query" :  `${req.query.query}`,
                     "path": "title",
                     "fuzzy": {
                         "maxEdits":2,
@@ -38,25 +38,25 @@ app.get("/search", async (request,response) => {
             }
         }
         ]).toArray()
-        response.send(result)
+        res.send(result)
     } catch (error) {
-        response.status(500).send({message: error.message})
+        res.status(500).send({message: error.message})
     }
 })
 
-app.get("/get/:id", async (request, response) => {
+app.get("/get/:id", async (req, res) => {
     try {
         let result = await collection.findOne({
-            "_id": ObjectId(request.params.id)
+            "_id": new ObjectId(req.params.id)
         })
-        response.send(result)
+        res.send(result)
     } catch (error){
-        response.status(500).send({message: error.message})
+        res.status(500).send({message: error.message})
     }
 })
 
-app.get("/", (request, response) => {
-    response.send("Welcome to the server!");
+app.get("/", (req, res) => {
+    res.send("Welcome to the server!");
 });
 app.listen(process.env.PORT || PORT, () => {
             console.log(`Server is running on PORT ${PORT}`)
