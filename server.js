@@ -55,9 +55,9 @@ app.get("/get/:id", async (req, res) => {
     }
 })
 
-app.get("/", (req, res) => {
-    res.send("Welcome to the server!");
-});
+// app.get("/", (req, res) => {
+//     res.send("Welcome to the server!");
+// });
 app.listen(process.env.PORT || PORT, () => {
             console.log(`Server is running on PORT ${PORT}`)
         })

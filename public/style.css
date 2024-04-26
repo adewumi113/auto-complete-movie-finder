@@ -10,3 +10,17 @@ img{
 input{
     width: 400px
 }
+
+#nom > section{
+    box-sizing: border-box;
+    float: left;
+    margin-left: 2%;
+}
+
+#nom > section + section {
+    width: 60%;
+}
+
+#sec li{
+    margin-bottom: 2%;
+}
