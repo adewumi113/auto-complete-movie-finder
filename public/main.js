@@ -1,7 +1,7 @@
 $(document).ready(function () {
     $("#title").autocomplete({
         source: async function (request, res) {
-            let data = await fetch(`/search?query=${request.term}`)
+            let data = await fetch(`https://auto-complete-movie-finder.onrender.com/search?query=${request.term}`)
                 .then(results => results.json())
                 .then(results => results.map(result => {
                     return {
@@ -15,7 +15,7 @@ $(document).ready(function () {
         minLength: 2,
         select: function (event, ui) {
             console.log(ui.item.id)
-            fetch(`/get/${ui.item.id}`)
+            fetch(`https://auto-complete-movie-finder.onrender.com/get/${ui.item.id}`)
                 .then(result => result.json())
                 .then(result => {
                     $("#cast").empty()
